@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkjg3nmvfjy0j"]
+
+[ext_resource type="Texture2D" uid="uid://d13uj0x1gefl6" path="res://Images/title.png" id="1_q5smy"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_uhu8o"]
+
+[node name="mainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uhu8o")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="title" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_q5smy")
+
+[node name="startButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Play
+"
+
+[node name="exitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Exit
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/exitButton" to="." method="_on_exit_button_pressed"]

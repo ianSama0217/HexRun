@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://v61xih8q481t"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_680hb"]
+[ext_resource type="Texture2D" uid="uid://doojwu3ayu5hi" path="res://Images/player.png" id="2_21q86"]
+[ext_resource type="Script" path="res://Scripts/hexSpawner.gd" id="4_khwo4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mhm0"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kulqj"]
+size = Vector2(16, 16)
+
+[node name="world" type="Node2D"]
+
+[node name="player" type="CharacterBody2D" parent="."]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_680hb")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+position = Vector2(-4.41074e-05, -5.84126e-06)
+scale = Vector2(0.0653063, 0.115942)
+texture = ExtResource("2_21q86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_1mhm0")
+
+[node name="hitbox" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/hitbox"]
+shape = SubResource("RectangleShape2D_kulqj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="hexSpawner" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+autostart = true
+script = ExtResource("4_khwo4")
+
+[connection signal="body_entered" from="player/hitbox" to="player" method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="hexSpawner" to="hexSpawner" method="_on_timeout"]
